@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "874797687056",
+    "project_id": "database-dev-d1ab5",
+    "storage_bucket": "database-dev-d1ab5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:874797687056:android:237b7c0d6236cab1da0595",
+        "android_client_info": {
+          "package_name": "com.spiderman.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "874797687056-fk1m5ig87nvpovecg36l6k5t1ilcd2rt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXg4cA_CViqpK3y0KhQIM2VEQ4yxZTkP4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "874797687056-fk1m5ig87nvpovecg36l6k5t1ilcd2rt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
