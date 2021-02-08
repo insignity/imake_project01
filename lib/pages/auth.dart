@@ -17,8 +17,6 @@ class AuthorizationPageState extends State<AuthorizationPage> {
   String _password;
   bool showLogin = true;
 
-  //AuthService _authService = AuthService();
-
   @override
   Widget build(BuildContext context) {
     Widget _logo() {
@@ -117,30 +115,7 @@ class AuthorizationPageState extends State<AuthorizationPage> {
         _emailController.clear();
         _passwordController.clear();
       }
-
-      //   DomainUser user = await _authService.signInWithEmailAndPassword(
-      //       _email.trim(), _password.trim());
-      //   if (user == null) {
-      //     Fluttertoast.showToast(
-      //         msg: "Can't sign in you! Please check out your login and password",
-      //         toastLength: Toast.LENGTH_SHORT,
-      //         gravity: ToastGravity.CENTER,
-      //         timeInSecForIosWeb: 1,
-      //         backgroundColor: Colors.red,
-      //         textColor: Colors.white,
-      //         fontSize: 16.0);
-      //   } else {
-      //     _emailController.clear();
-      //     _passwordController.clear();
-      //   }
     }
-
-    // void _loginButtonAction() {
-    //   _email = _emailController.text;
-    //   _password = _passwordController.text;
-    //   if (_email.isEmpty || _password.isEmpty) return;
-    //   if (_email.isNotEmpty && _password.isNotEmpty) return _login();
-    // }
 
     _registerButtonAction() {
       _email = _emailController.text;
@@ -153,21 +128,6 @@ class AuthorizationPageState extends State<AuthorizationPage> {
         _passwordController.clear();
       }
     }
-    //   // DomainUser user = await _authService.registerWithEmailAndPassword(
-    //   //     _email.trim(), _password.trim());
-    //   if (user == null) {
-    //     Fluttertoast.showToast(
-    //         msg: "Can't register you! Please check out your login and password",
-    //         toastLength: Toast.LENGTH_SHORT,
-    //         gravity: ToastGravity.CENTER,
-    //         timeInSecForIosWeb: 1,
-    //         backgroundColor: Colors.red,
-    //         textColor: Colors.white,
-    //         fontSize: 16.0);
-    //   } else {
-    //     _emailController.clear();
-    //     _passwordController.clear();
-    //   }
 
     Widget _bottomWave() {
       return Expanded(
@@ -177,7 +137,6 @@ class AuthorizationPageState extends State<AuthorizationPage> {
               color: Colors.white,
               height: 300,
             ),
-            clipper: BottomWaveClipper(),
           ),
           alignment: Alignment.bottomCenter,
         ),
@@ -231,27 +190,7 @@ class AuthorizationPageState extends State<AuthorizationPage> {
                       )
                     ],
                   )),
-            //_bottomWave()
           ],
         ));
   }
-}
-
-class BottomWaveClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = Path();
-    path.moveTo(size.width, 0.0);
-    path.lineTo(size.width, size.height);
-    path.lineTo(0.0, size.height);
-    path.lineTo(0.0, size.height + 5);
-    var secondControlPoint = Offset(size.width - (size.width / 6), size.height);
-    var secondEndPoint = Offset(size.width, 0.0);
-    path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
-        secondEndPoint.dx, secondEndPoint.dy);
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }

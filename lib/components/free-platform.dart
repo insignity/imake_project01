@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:real/domain/workout.dart';
+import 'package:real/domain/order.dart';
 
 class FreePlatformPage extends StatefulWidget {
   FreePlatformPage({Key key}) : super(key: key);
@@ -15,28 +15,28 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
     super.initState();
   }
 
-  final workouts = <Workout>[
-    Workout(
+  final workouts = <Order>[
+    Order(
         title: 'Test1',
         author: 'max1',
         description: 'test1',
         level: 'Beginner'),
-    Workout(
+    Order(
         title: 'Test2',
         author: 'max2',
         description: 'test2',
         level: 'Intermediate'),
-    Workout(
+    Order(
         title: 'Test3',
         author: 'max3',
         description: 'test3',
         level: 'Beginner'),
-    Workout(
+    Order(
         title: 'Test4',
         author: 'max4',
         description: 'test4',
         level: 'Intermediate'),
-    Workout(
+    Order(
         title: 'Test5',
         author: 'max5',
         description: 'test5',
@@ -51,7 +51,7 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
   var filterText = '';
   var filterHeight = 0.0;
 
-  List<Workout> filter() {
+  List<Order> filter() {
     setState(() {
       filterText = filterOnlyMyWorkouts ? 'My workouts' : 'All workouts';
       filterText += '/' + filterLevel;
@@ -63,7 +63,7 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
     return list;
   }
 
-  List<Workout> clearFilter() {
+  List<Order> clearFilter() {
     setState(() {
       filterText = 'All workouts/Any level';
       filterOnlyMyWorkouts = false;
@@ -209,7 +209,7 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
   }
 }
 
-Widget subtitle(BuildContext context, Workout workout) {
+Widget subtitle(BuildContext context, Order workout) {
   var color = Colors.grey;
   double indicatorLevel = 0;
 
