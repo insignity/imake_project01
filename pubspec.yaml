@@ -33,6 +33,7 @@ dependencies:
   provider: ^4.3.3
   fluttertoast: ^7.1.6
   curved_navigation_bar: ^0.3.7
+  waterfall_flow: any
   
 dev_dependencies:
   flutter_test:
@@ -52,6 +53,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/images/posts/left/
+    - assets/images/posts/right/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

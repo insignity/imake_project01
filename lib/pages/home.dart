@@ -43,21 +43,37 @@ class _HomePageState extends State<HomePage> {
         case 0:
           return FreePlatformPage();
           break;
-
         case 1:
           return Salons();
           break;
-
         case 2:
           return Freelancers();
           break;
-
         case 3:
           return AllPosts();
           break;
-
         case 4:
           return HistoryPage();
+          break;
+      }
+    }
+
+    checkingBottomNavigationBarForTitle() {
+      switch (sectionIndex) {
+        case 0:
+          return 'FreePlatformPage';
+          break;
+        case 1:
+          return 'Salons';
+          break;
+        case 2:
+          return 'Freelancers';
+          break;
+        case 3:
+          return 'AllPosts';
+          break;
+        case 4:
+          return 'HistoryPage';
           break;
       }
     }
@@ -66,14 +82,14 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
-          title: Text("MasterClient"),
+          title: Text(checkingBottomNavigationBarForTitle()),
           leading: Icon(
             Icons.reorder,
             size: 50,
           ),
           actions: <Widget>[
             CircleAvatar(
-                radius: 30,
+                radius: 20,
                 backgroundColor: Color.fromARGB(1, 0, 0, 0),
                 backgroundImage: AssetImage(
                   'assets/images/wat.png',
