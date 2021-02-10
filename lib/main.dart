@@ -13,8 +13,16 @@ class RealApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Real App',
       theme: ThemeData(
-          primaryColor: Color.fromRGBO(50, 65, 85, 1),
-          textTheme: TextTheme(headline1: TextStyle(color: Colors.white))),
+        primaryColor: Color.fromRGBO(50, 65, 85, 1),
+        textTheme: TextTheme(
+          headline1: TextStyle(
+              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+          headline2: TextStyle(
+              color: Colors.white70,
+              fontSize: 10,
+              fontWeight: FontWeight.normal),
+        ),
+      ),
       home: AuthorizationPage(),
       routes: {
         '/start': (BuildContext context) => RealApp(),

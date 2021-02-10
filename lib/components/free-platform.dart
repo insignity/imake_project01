@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:real/domain/order.dart';
+import 'dart:math';
 
 class FreePlatformPage extends StatefulWidget {
   FreePlatformPage({Key key}) : super(key: key);
@@ -17,35 +18,45 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
 
   final workouts = <Order>[
     Order(
-        title: 'Test1',
-        author: 'max1',
-        description: 'test1',
-        level: 'Beginner',
-        avatar: AssetImage('assets/images/people/1.png')),
+      title: 'Брови, ресницы, ногти',
+      author: 'Александра',
+      description: 'На дом: ул. Ленина 98',
+      level: 'Beginner',
+      avatar: AssetImage('assets/images/people/1.png'),
+      price: 900,
+    ),
     Order(
-        title: 'Test2',
-        author: 'max2',
-        description: 'test2',
-        level: 'Intermediate',
-        avatar: AssetImage('assets/images/people/2.png')),
+      title: 'На вечер: Прическа, макияж, ногти',
+      author: 'Нина',
+      description: 'На дом: ул. Орджиникидзе 12',
+      level: 'Intermediate',
+      avatar: AssetImage('assets/images/people/2.png'),
+      price: 1200,
+    ),
     Order(
-        title: 'Test3',
-        author: 'max3',
-        description: 'test3',
-        level: 'Beginner',
-        avatar: AssetImage('assets/images/people/3.png')),
+      title: 'Нужен парикмахер',
+      author: 'Виктория',
+      description: 'На дом: ул. Лермонтова 99/2',
+      level: 'Beginner',
+      avatar: AssetImage('assets/images/people/3.png'),
+      price: 700,
+    ),
     Order(
-        title: 'Test4',
-        author: 'max4',
-        description: 'test4',
-        level: 'Intermediate',
-        avatar: AssetImage('assets/images/people/4.png')),
+      title: 'Нужен парикмахер',
+      author: 'Петр',
+      description: 'Ваша территория, в пределах 2 км',
+      level: 'Intermediate',
+      avatar: AssetImage('assets/images/people/4.png'),
+      price: 800,
+    ),
     Order(
-        title: 'Test5',
-        author: 'max5',
-        description: 'test5',
-        level: 'Advanced',
-        avatar: AssetImage('assets/images/people/5.png')),
+      title: 'Нужен парикмахер',
+      author: 'Анатолий',
+      description: '',
+      level: 'Advanced',
+      avatar: AssetImage('assets/images/people/5.png'),
+      price: 500,
+    ),
   ];
 
   var filterOnlyMyWorkouts = false;
@@ -84,53 +95,112 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
   @override
   Widget build(BuildContext context) {
     var workoutsList = Expanded(
-      child: ListView.builder(
-          itemCount: workouts.length,
-          itemBuilder: (context, index) {
-            return Card(
-              elevation: 2.0,
-              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              child: Container(
-                height: 100,
-                decoration:
-                    BoxDecoration(color: Color.fromRGBO(50, 65, 85, 0.8)),
-                child: Column(children: [
-                  ListTile(
-                    leading: Container(
-                      height: 60,
-                      padding: EdgeInsets.only(
-                        right: 20,
-                      ),
-                      child: Container(
-                        child: CircleAvatar(
-                            radius: 30,
-                            backgroundImage: workouts[index].avatar),
-                      ),
-                      decoration: BoxDecoration(
-                          border: Border(
-                              right:
-                                  BorderSide(width: 1, color: Colors.white24))),
-                    ),
-                    contentPadding: EdgeInsets.only(
-                        top: 1, left: 18, right: 18, bottom: 20),
-                    title: Text(
-                      workouts[index].title,
-                      style: TextStyle(
-                          color: Theme.of(context).textTheme.headline1.color,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    trailing: Icon(
-                      Icons.keyboard_arrow_right,
-                      color: Theme.of(context).textTheme.headline1.color,
-                    ),
-                    subtitle: subtitle(context, workouts[index]),
-                  ),
-                ]),
-              ),
-            );
-          }),
-    );
-
+        child: ListView.builder(
+            itemCount: workouts.length,
+            itemBuilder: (context, index) {
+              return Card(
+                elevation: 2.0,
+                margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                child: Container(
+                    height: 100,
+                    decoration:
+                        BoxDecoration(color: Color.fromRGBO(50, 65, 85, 0.8)),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 4,
+                          child: Container(
+                              padding: EdgeInsets.only(top: 2),
+                              child: Column(
+                                children: [
+                                  CircleAvatar(
+                                      radius: 30,
+                                      backgroundImage: workouts[index].avatar),
+                                  Text(workouts[index].author,
+                                      style: TextStyle(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .headline1
+                                            .color,
+                                      )),
+                                  subtitle(context, workouts[index]),
+                                ],
+                              ),
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                      right: BorderSide(
+                                          width: 1, color: Colors.white24)))),
+                        ),
+                        Expanded(
+                            //===========================================================
+                            flex: 11,
+                            child: Container(
+                                alignment: Alignment.topLeft,
+                                padding: EdgeInsets.only(
+                                    top: 1, left: 10, right: 10, bottom: 2),
+                                child: Column(children: [
+                                  Container(
+                                    //-----------------------TITLE
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      workouts[index].title,
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .headline1
+                                              .color,
+                                          fontWeight: FontWeight.bold),
+                                      textAlign: TextAlign.left,
+                                    ),
+                                  ),
+                                  Container(
+                                    //--------------------DESCRIPTION
+                                    alignment: Alignment.topLeft,
+                                    padding: EdgeInsets.only(top: 5),
+                                    child: Text(
+                                      workouts[index].description,
+                                      style: TextStyle(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .headline2
+                                            .color,
+                                      ),
+                                      textAlign: TextAlign.left,
+                                    ),
+                                  ),
+                                  Expanded(
+                                    //----------PRICE
+                                    flex: 1,
+                                    child: Container(
+                                      alignment: Alignment.bottomLeft,
+                                      child: Text(
+                                        workouts[index].price.toString(),
+                                        style: TextStyle(
+                                          color: Colors.red,
+                                        ),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ),
+                                  ),
+                                ]))), //================================================
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                              height: 100,
+                              child: Icon(
+                                Icons.keyboard_arrow_right,
+                                color:
+                                    Theme.of(context).textTheme.headline1.color,
+                              ),
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                      left: BorderSide(
+                                          width: 1, color: Colors.white24)))),
+                        )
+                      ],
+                    )),
+              );
+            }));
     var filterInfo = Container(
         margin: EdgeInsets.only(top: 3, left: 7, right: 7, bottom: 5),
         decoration: BoxDecoration(color: Colors.white.withOpacity(0.5)),
@@ -225,39 +295,49 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
 Widget subtitle(BuildContext context, Order workout) {
   var color = Colors.grey;
   double indicatorLevel = 0;
+  String rating = "Рейтинг ";
+
+  var rng = new Random();
+  double rand1 = rng.nextInt(10) / 10 + 1;
+  int rand2 = rng.nextInt(1000);
 
   switch (workout.level) {
     case 'Beginner':
-      color = Colors.green;
-      indicatorLevel = 0.33;
+      color = Colors.amber;
+      indicatorLevel = 0.7;
+      rating += "7/10";
       break;
     case 'Intermediate':
-      color = Colors.yellow;
-      indicatorLevel = 0.66;
+      color = Colors.lightGreen;
+      indicatorLevel = 0.85;
+      rating += "8.5/10";
       break;
     case 'Advanced':
-      color = Colors.red;
+      color = Colors.green;
       indicatorLevel = 1.0;
+      rating += "10/10";
       break;
   }
 
-  return Row(children: <Widget>[
-    Expanded(
-      flex: 1,
-      child: LinearProgressIndicator(
-        backgroundColor: Theme.of(context).textTheme.headline1.color,
-        value: indicatorLevel,
-        valueColor: AlwaysStoppedAnimation(color),
-      ),
-    ),
-    SizedBox(
-      width: 10,
-    ),
-    Expanded(
-        flex: 3,
-        child: Text(workout.level,
-            style: TextStyle(
-              color: Theme.of(context).textTheme.headline1.color,
-            )))
+  return Column(children: [
+    Row(children: <Widget>[
+      Expanded(
+        child: Container(
+          alignment: Alignment.center,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.favorite_border,
+                color: Colors.red,
+                size: 20,
+              ),
+              Text("(" + rand2.toString() + ") " + rand1.toString() + "км",
+                  style: TextStyle(color: Colors.white, fontSize: 10))
+            ],
+          ),
+        ),
+      )
+    ]),
   ]);
 }

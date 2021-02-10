@@ -25,7 +25,7 @@ class AuthorizationPageState extends State<AuthorizationPage> {
           child: Align(
               alignment: Alignment.center,
               child: Text(
-                "CHEK PAVUK",
+                "iMake",
                 style: TextStyle(
                   fontSize: 45,
                   fontWeight: FontWeight.bold,
