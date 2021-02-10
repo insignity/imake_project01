@@ -11,6 +11,8 @@ class _AllPostsState extends State<AllPosts> {
   List<Widget> _imageListLeft(int count) => List.generate(
         count,
         (i) => FittedBox(
+          alignment: Alignment.topCenter,
+          fit: BoxFit.fill,
           child: Container(
             padding: EdgeInsets.all(2),
             child: Image.asset(
@@ -23,7 +25,9 @@ class _AllPostsState extends State<AllPosts> {
   List<Widget> _imageListRight(int count) => List.generate(
         count,
         (i) => FittedBox(
+          alignment: Alignment.topCenter,
           child: Container(
+            alignment: Alignment.topCenter,
             padding: EdgeInsets.all(2),
             child: Image.asset(
               'assets/images/posts/right/i$i' + '_200.jpg',
@@ -38,16 +42,18 @@ class _AllPostsState extends State<AllPosts> {
     return SingleChildScrollView(
       child: Row(children: <Widget>[
         Expanded(
-          flex: 1,
           child: Column(
-            children: _imageListLeft(8),
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: _imageListLeft(3),
           ),
         ),
         Expanded(
-            flex: 1,
             child: Column(
-              children: _imageListRight(7),
-            )),
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: _imageListRight(3),
+        )),
       ]),
     );
   }

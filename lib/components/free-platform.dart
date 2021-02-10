@@ -20,27 +20,32 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
         title: 'Test1',
         author: 'max1',
         description: 'test1',
-        level: 'Beginner'),
+        level: 'Beginner',
+        avatar: AssetImage('assets/images/people/1.png')),
     Order(
         title: 'Test2',
         author: 'max2',
         description: 'test2',
-        level: 'Intermediate'),
+        level: 'Intermediate',
+        avatar: AssetImage('assets/images/people/2.png')),
     Order(
         title: 'Test3',
         author: 'max3',
         description: 'test3',
-        level: 'Beginner'),
+        level: 'Beginner',
+        avatar: AssetImage('assets/images/people/3.png')),
     Order(
         title: 'Test4',
         author: 'max4',
         description: 'test4',
-        level: 'Intermediate'),
+        level: 'Intermediate',
+        avatar: AssetImage('assets/images/people/4.png')),
     Order(
         title: 'Test5',
         author: 'max5',
         description: 'test5',
-        level: 'Advanced'),
+        level: 'Advanced',
+        avatar: AssetImage('assets/images/people/5.png')),
   ];
 
   var filterOnlyMyWorkouts = false;
@@ -86,33 +91,41 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
               elevation: 2.0,
               margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               child: Container(
+                height: 100,
                 decoration:
                     BoxDecoration(color: Color.fromRGBO(50, 65, 85, 0.8)),
-                child: ListTile(
-                  leading: Container(
-                    padding: EdgeInsets.only(right: 12),
-                    child: Icon(
-                      Icons.fitness_center,
-                      color: Colors.white,
+                child: Column(children: [
+                  ListTile(
+                    leading: Container(
+                      height: 60,
+                      padding: EdgeInsets.only(
+                        right: 20,
+                      ),
+                      child: Container(
+                        child: CircleAvatar(
+                            radius: 30,
+                            backgroundImage: workouts[index].avatar),
+                      ),
+                      decoration: BoxDecoration(
+                          border: Border(
+                              right:
+                                  BorderSide(width: 1, color: Colors.white24))),
                     ),
-                    decoration: BoxDecoration(
-                        border: Border(
-                            right:
-                                BorderSide(width: 1, color: Colors.white24))),
+                    contentPadding: EdgeInsets.only(
+                        top: 1, left: 18, right: 18, bottom: 20),
+                    title: Text(
+                      workouts[index].title,
+                      style: TextStyle(
+                          color: Theme.of(context).textTheme.headline1.color,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    trailing: Icon(
+                      Icons.keyboard_arrow_right,
+                      color: Theme.of(context).textTheme.headline1.color,
+                    ),
+                    subtitle: subtitle(context, workouts[index]),
                   ),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 10),
-                  title: Text(
-                    workouts[index].title,
-                    style: TextStyle(
-                        color: Theme.of(context).textTheme.headline1.color,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  trailing: Icon(
-                    Icons.keyboard_arrow_right,
-                    color: Theme.of(context).textTheme.headline1.color,
-                  ),
-                  subtitle: subtitle(context, workouts[index]),
-                ),
+                ]),
               ),
             );
           }),

@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
           actions: <Widget>[
             CircleAvatar(
                 radius: 20,
-                backgroundColor: Color.fromARGB(1, 0, 0, 0),
+                backgroundColor: Color.fromARGB(0, 0, 0, 0),
                 backgroundImage: AssetImage(
                   'assets/images/wat.png',
                 )),
