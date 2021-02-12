@@ -87,17 +87,6 @@ class _HomePageState extends State<HomePage> {
             Icons.reorder,
             size: 50,
           ),
-          actions: <Widget>[
-            CircleAvatar(
-                radius: 20,
-                backgroundColor: Color.fromARGB(0, 0, 0, 0),
-                backgroundImage: AssetImage(
-                  'assets/images/wat.png',
-                )),
-            SizedBox(
-              width: 10,
-            )
-          ],
         ),
         body: checkingBottomNavigationBar(),
         bottomNavigationBar: navigationBar,

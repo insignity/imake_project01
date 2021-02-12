@@ -220,6 +220,7 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
             });
           },
         ));
+
     var levelMenuItems = <String>[
       'Any level',
       'Beginner',
@@ -231,6 +232,7 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
         child: new Text(value),
       );
     }).toList();
+
     var filterForm = AnimatedContainer(
       height: filterHeight,
       duration: Duration(milliseconds: 300),

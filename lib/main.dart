@@ -23,7 +23,7 @@ class RealApp extends StatelessWidget {
               fontWeight: FontWeight.normal),
         ),
       ),
-      home: AuthorizationPage(),
+      home: HomePage(),
       routes: {
         '/start': (BuildContext context) => RealApp(),
         '/auth': (BuildContext context) => AuthorizationPage(),

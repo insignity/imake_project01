@@ -226,11 +226,38 @@ class _FreelancersState extends State<Freelancers> {
         ),
       ),
     );
-
+    var pageView = PageView(
+      pageSnapping: false,
+      physics: BouncingScrollPhysics(),
+      children: [
+        Container(
+          height: 50,
+          color: Colors.red,
+          child: Center(
+            child: Text('first'),
+          ),
+        ),
+        Container(
+          height: 50,
+          color: Colors.red,
+          child: Center(
+            child: Text('first'),
+          ),
+        ),
+        Container(
+          height: 50,
+          color: Colors.red,
+          child: Center(
+            child: Text('first'),
+          ),
+        ),
+      ],
+    );
     return Column(
       children: <Widget>[
         filterInfo,
         filterForm,
+        // pageView,
         workoutsList,
       ],
     );
