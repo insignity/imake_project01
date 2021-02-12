@@ -34,7 +34,9 @@ dependencies:
   fluttertoast: ^7.1.6
   curved_navigation_bar: ^0.3.7
   waterfall_flow: any
-  flutter_staggered_grid_view: <latest_version>
+  flutter_staggered_grid_view: ^0.3.4
+  transparent_image: ^1.0.0
+
   
 dev_dependencies:
   flutter_test:
