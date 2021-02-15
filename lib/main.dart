@@ -6,16 +6,15 @@ import 'package:real/pages/auth.dart';
 //import 'package:real/pages/home.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'models/data.dart';
+
 void main() => runApp(RealApp());
 
 class RealApp extends StatelessWidget {
-  TypeOfUser typeOfUser = TypeOfUser();
-  final String userType = "User";
-
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (context) => userType,
+    return ChangeNotifierProvider<Data>(
+      create: (context) => Data(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Real App',
@@ -48,7 +47,7 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Container(
-            child: Text("sasdasd"),
+            child: Text(context.watch<Data>().getData),
           ),
         ),
         body: Center(
@@ -64,7 +63,13 @@ class Widget1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text(Provider.of<String>(context)));
+    return Container(
+        child: Row(
+      children: [
+        Text(context.watch<Data>().getData),
+        ElevatedButton(onPressed: () => context.read<Data>().changeType())
+      ],
+    ));
   }
 }
 
@@ -74,26 +79,5 @@ class MyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(onChanged: (newdata) => {});
-  }
-}
-
-class TypeOfUser {
-  List<String> types = ["Client", "Freelancer", "Salon"];
-  String _currentTypeOfUser = "Client";
-
-  String getTypeOfUser() {
-    return _currentTypeOfUser;
-  }
-
-  changeTypeOfUserToFreelancer() {
-    _currentTypeOfUser = types[1];
-  }
-
-  changeTypeOfUserToUser() {
-    _currentTypeOfUser = types[0];
-  }
-
-  TypeOfUser() {
-    changeTypeOfUserToUser();
   }
 }
