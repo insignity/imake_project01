@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:real/pages/home.dart';
-import 'package:real/services/auth.dart';
 
 class AuthorizationPage extends StatefulWidget {
   AuthorizationPage({Key key}) : super(key: key);

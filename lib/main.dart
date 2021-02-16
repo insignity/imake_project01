@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:real/pages/auth.dart';
-//import 'package:real/pages/home.dart';
+import 'package:real/pages/home.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'models/data.dart';
@@ -37,47 +37,5 @@ class RealApp extends StatelessWidget {
         },
       ),
     );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Container(
-            child: Text(context.watch<Data>().getData),
-          ),
-        ),
-        body: Center(
-          child: Widget1(),
-        ),
-      ),
-    );
-  }
-}
-
-class Widget1 extends StatelessWidget {
-  Widget1();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        child: Row(
-      children: [
-        Text(context.watch<Data>().getData),
-        ElevatedButton(onPressed: () => context.read<Data>().changeType())
-      ],
-    ));
-  }
-}
-
-class MyTextField extends StatelessWidget {
-  MyTextField({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(onChanged: (newdata) => {});
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:real/models/data.dart';
+import 'package:provider/provider.dart';
 
 class HistoryPage extends StatefulWidget {
   HistoryPage({Key key}) : super(key: key);
@@ -8,6 +10,13 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
+  String isUserClient() {
+    if (context.watch<Data>().isUserClient)
+      return "Стать исполнителем";
+    else
+      return "Стать клиентом";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,8 +39,10 @@ class _HistoryPageState extends State<HistoryPage> {
                     style: TextStyle(color: Colors.white),
                   )),
                   Center(
-                      child:
-                          Switch(value: false, onChanged: (bool newValue) {}))
+                    child: ElevatedButton(
+                        child: Text(isUserClient()),
+                        onPressed: () => context.read<Data>().changeType()),
+                  )
                 ]),
               ),
             )

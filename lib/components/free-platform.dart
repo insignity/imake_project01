@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:real/domain/order.dart';
 import 'dart:math';
+import 'package:provider/provider.dart';
+import 'package:real/models/data.dart';
 
 class FreePlatformPage extends StatefulWidget {
   FreePlatformPage({Key key}) : super(key: key);
@@ -16,7 +18,7 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
     super.initState();
   }
 
-  final workouts = <Order>[
+  final orders = <Order>[
     Order(
       title: 'Брови, ресницы, ногти',
       author: 'Александра',
@@ -69,34 +71,34 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
 
   List<Order> filter() {
     setState(() {
-      filterText = filterOnlyMyWorkouts ? 'My workouts' : 'All workouts';
+      filterText = filterOnlyMyWorkouts ? 'My orders' : 'All orders';
       filterText += '/' + filterLevel;
       print(filterTitle);
       if (filterTitle.isNotEmpty) filterText += '/' + filterTitle;
       filterHeight = 0;
     });
-    var list = workouts;
+    var list = orders;
     return list;
   }
 
   List<Order> clearFilter() {
     setState(() {
-      filterText = 'All workouts/Any level';
+      filterText = 'All orders/Any level';
       filterOnlyMyWorkouts = false;
       filterTitle = '';
       filterLevel = 'Any level';
       filterTitleController.clear();
       filterHeight = 0;
     });
-    var list = workouts;
+    var list = orders;
     return list;
   }
 
   @override
   Widget build(BuildContext context) {
-    var workoutsList = Expanded(
+    var ordersList = Expanded(
         child: ListView.builder(
-            itemCount: workouts.length,
+            itemCount: orders.length,
             itemBuilder: (context, index) {
               return Card(
                 elevation: 2.0,
@@ -115,15 +117,15 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
                                 children: [
                                   CircleAvatar(
                                       radius: 30,
-                                      backgroundImage: workouts[index].avatar),
-                                  Text(workouts[index].author,
+                                      backgroundImage: orders[index].avatar),
+                                  Text(orders[index].author,
                                       style: TextStyle(
                                         color: Theme.of(context)
                                             .textTheme
                                             .headline1
                                             .color,
                                       )),
-                                  subtitle(context, workouts[index]),
+                                  subtitle(context, orders[index]),
                                 ],
                               ),
                               decoration: BoxDecoration(
@@ -143,7 +145,7 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
                                     //-----------------------TITLE
                                     alignment: Alignment.topLeft,
                                     child: Text(
-                                      workouts[index].title,
+                                      orders[index].title,
                                       style: TextStyle(
                                           color: Theme.of(context)
                                               .textTheme
@@ -158,7 +160,7 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
                                     alignment: Alignment.topLeft,
                                     padding: EdgeInsets.only(top: 5),
                                     child: Text(
-                                      workouts[index].description,
+                                      orders[index].description,
                                       style: TextStyle(
                                         color: Theme.of(context)
                                             .textTheme
@@ -174,7 +176,7 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
                                     child: Container(
                                       alignment: Alignment.bottomLeft,
                                       child: Text(
-                                        workouts[index].price.toString(),
+                                        orders[index].price.toString(),
                                         style: TextStyle(
                                           color: Colors.red,
                                         ),
@@ -284,17 +286,73 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
       ),
     );
 
+    var orderForm = Container(
+      padding: EdgeInsets.only(left: 20, right: 20, top: 20),
+      margin: EdgeInsets.only(top: 100),
+      color: Colors.white,
+      height: 450,
+      child: Column(
+        children: [
+          Container(
+            height: 70,
+            child: Center(
+              child: Text(
+                "Сделать заказ",
+                style: TextStyle(fontSize: 24),
+              ),
+            ),
+          ),
+          Container(
+              height: 70,
+              child: Row(
+                children: [
+                  Expanded(flex: 1, child: Text("Название:")),
+                  Expanded(flex: 2, child: TextField())
+                ],
+              )),
+          Container(
+              height: 70,
+              child: Row(
+                children: [
+                  Expanded(flex: 1, child: Text("Место:")),
+                  Expanded(flex: 2, child: TextField())
+                ],
+              )),
+          Container(
+              height: 70,
+              child: Row(
+                children: [
+                  Expanded(flex: 1, child: Text("Цена:")),
+                  Expanded(flex: 2, child: TextField())
+                ],
+              )),
+          Container(
+              height: 70,
+              child: Row(
+                children: [
+                  Expanded(flex: 1, child: Text("Комментарий:")),
+                  Expanded(flex: 2, child: TextField())
+                ],
+              )),
+          ElevatedButton(
+            onPressed: () {},
+            child: Text("Заказать"),
+          )
+        ],
+      ),
+    );
+    List<Widget> freelanserWidgets = [filterInfo, filterForm, ordersList];
+    List<Widget> userWidgets = [orderForm];
     return Column(
-      children: <Widget>[
-        filterInfo,
-        filterForm,
-        workoutsList,
-      ],
+      //||||||||||||||||||||||||MAIN||||||||||||||||||
+      children:
+          context.watch<Data>().isUserClient ? userWidgets : freelanserWidgets,
     );
   }
 }
 
-Widget subtitle(BuildContext context, Order workout) {
+Widget subtitle(BuildContext context, Order order) {
+  //Лайки расстояиние
   var color = Colors.grey;
   double indicatorLevel = 0;
   String rating = "Рейтинг ";
@@ -302,24 +360,6 @@ Widget subtitle(BuildContext context, Order workout) {
   var rng = new Random();
   double rand1 = rng.nextInt(10) / 10 + 1;
   int rand2 = rng.nextInt(1000);
-
-  switch (workout.level) {
-    case 'Beginner':
-      color = Colors.amber;
-      indicatorLevel = 0.7;
-      rating += "7/10";
-      break;
-    case 'Intermediate':
-      color = Colors.lightGreen;
-      indicatorLevel = 0.85;
-      rating += "8.5/10";
-      break;
-    case 'Advanced':
-      color = Colors.green;
-      indicatorLevel = 1.0;
-      rating += "10/10";
-      break;
-  }
 
   return Column(children: [
     Row(children: <Widget>[

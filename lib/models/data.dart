@@ -1,16 +1,15 @@
 import 'package:flutter/widgets.dart';
 
 class Data with ChangeNotifier {
-  String _type = "Client";
-  List<String> types = ['Client', 'Freelancer'];
+  bool _type = false;
 
-  String get getData => _type;
+  bool get isUserClient => _type;
 
   changeType() {
-    if (_type == types[0]) {
-      _type = types[1];
+    if (_type == false) {
+      _type = true;
     } else {
-      _type = types[0];
+      _type = false;
     }
     notifyListeners();
   }

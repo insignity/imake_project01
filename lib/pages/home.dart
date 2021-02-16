@@ -6,6 +6,8 @@ import 'package:real/components/all-posts.dart';
 import 'package:real/components/freelancers.dart';
 import 'package:real/components/salons.dart';
 import 'package:real/components/history.dart';
+import 'package:real/models/data.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -82,7 +84,10 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
-          title: Text(checkingBottomNavigationBarForTitle()),
+          title: Text(context
+              .watch<Data>()
+              .isUserClient
+              .toString()), //checkingBottomNavigationBarForTitle()),
           leading: Icon(
             Icons.reorder,
             size: 50,
