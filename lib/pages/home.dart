@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:real/components/free-platform.dart';
 import 'package:real/components/all-posts.dart';
 import 'package:real/components/freelancers.dart';
-import 'package:real/components/salons.dart';
-import 'package:real/components/history.dart';
+import 'package:real/components/profile.dart';
 import 'package:real/models/data.dart';
 import 'package:provider/provider.dart';
 
@@ -24,10 +23,10 @@ class _HomePageState extends State<HomePage> {
     var navigationBar = CurvedNavigationBar(
       items: const <Widget>[
         Icon(Icons.directions_car_sharp),
-        Icon(Icons.house_outlined),
         Icon(Icons.person_search),
+        Icon(Icons.control_point_sharp),
         Icon(Icons.auto_awesome_mosaic),
-        Icon(Icons.history)
+        Icon(Icons.portrait_rounded)
       ],
       index: 0,
       height: 50,
@@ -46,7 +45,7 @@ class _HomePageState extends State<HomePage> {
           return FreePlatformPage();
           break;
         case 1:
-          return Salons();
+          return Freelancers();
           break;
         case 2:
           return Freelancers();
@@ -66,16 +65,16 @@ class _HomePageState extends State<HomePage> {
           return 'FreePlatformPage';
           break;
         case 1:
-          return 'Salons';
+          return 'Representatives';
           break;
         case 2:
-          return 'Freelancers';
+          return 'Representatives';
           break;
         case 3:
           return 'AllPosts';
           break;
         case 4:
-          return 'HistoryPage';
+          return 'ProfilePage';
           break;
       }
     }
@@ -84,10 +83,7 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
-          title: Text(context
-              .watch<Data>()
-              .isUserClient
-              .toString()), //checkingBottomNavigationBarForTitle()),
+          title: Text(checkingBottomNavigationBarForTitle()),
           leading: Icon(
             Icons.reorder,
             size: 50,

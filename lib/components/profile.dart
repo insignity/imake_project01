@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:real/models/data.dart';
+import 'package:real/domain/current_profile.dart';
 import 'package:provider/provider.dart';
+import 'package:real/models/user.dart';
 
 class HistoryPage extends StatefulWidget {
   HistoryPage({Key key}) : super(key: key);
@@ -11,7 +12,7 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
   String isUserClient() {
-    if (context.watch<Data>().isUserClient)
+    if (context.watch<Profile>().isUserClient)
       return "Стать исполнителем";
     else
       return "Стать клиентом";
@@ -26,7 +27,7 @@ class _HistoryPageState extends State<HistoryPage> {
             Expanded(
               flex: 2,
               child: Container(
-                child: Image.asset('assets/images/wat.png'),
+                child: Image.asset(currentProfile.imageSource),
               ),
             ),
             Expanded(
@@ -35,13 +36,13 @@ class _HistoryPageState extends State<HistoryPage> {
                 child: Column(children: [
                   Center(
                       child: Text(
-                    "Попова Евгения",
+                    currentProfile.name,
                     style: TextStyle(color: Colors.white),
                   )),
                   Center(
                     child: ElevatedButton(
                         child: Text(isUserClient()),
-                        onPressed: () => context.read<Data>().changeType()),
+                        onPressed: () => context.read<Profile>().changeType()),
                   )
                 ]),
               ),

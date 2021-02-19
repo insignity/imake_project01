@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:real/domain/order.dart';
+import 'package:flutter/rendering.dart';
+import 'package:real/domain/list_of_orders.dart';
+import 'package:real/models/order.dart';
 import 'dart:math';
 import 'package:provider/provider.dart';
 import 'package:real/models/data.dart';
+import 'package:dropdownfield/dropdownfield.dart';
+import 'package:real/models/user.dart';
 
 class FreePlatformPage extends StatefulWidget {
   FreePlatformPage({Key key}) : super(key: key);
@@ -17,49 +21,6 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
     clearFilter();
     super.initState();
   }
-
-  final orders = <Order>[
-    Order(
-      title: 'Брови, ресницы, ногти',
-      author: 'Александра',
-      description: 'На дом: ул. Ленина 98',
-      level: 'Beginner',
-      avatar: AssetImage('assets/images/people/1.png'),
-      price: 900,
-    ),
-    Order(
-      title: 'На вечер: Прическа, макияж, ногти',
-      author: 'Нина',
-      description: 'На дом: ул. Орджиникидзе 12',
-      level: 'Intermediate',
-      avatar: AssetImage('assets/images/people/2.png'),
-      price: 1200,
-    ),
-    Order(
-      title: 'Нужен парикмахер',
-      author: 'Виктория',
-      description: 'На дом: ул. Лермонтова 99/2',
-      level: 'Beginner',
-      avatar: AssetImage('assets/images/people/3.png'),
-      price: 700,
-    ),
-    Order(
-      title: 'Нужен парикмахер',
-      author: 'Петр',
-      description: 'Ваша территория, в пределах 2 км',
-      level: 'Intermediate',
-      avatar: AssetImage('assets/images/people/4.png'),
-      price: 800,
-    ),
-    Order(
-      title: 'Нужен парикмахер',
-      author: 'Анатолий',
-      description: '',
-      level: 'Advanced',
-      avatar: AssetImage('assets/images/people/5.png'),
-      price: 500,
-    ),
-  ];
 
   var filterOnlyMyWorkouts = false;
   var filterTitle = '';
@@ -92,6 +53,35 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
     });
     var list = orders;
     return list;
+  }
+
+  final ordersSelectedName = TextEditingController();
+  final ordersSelectedAddress = TextEditingController();
+  final ordersSelectedPrice = TextEditingController();
+  final ordersSelectedComment = TextEditingController();
+  clearTextControllers() {
+    ordersSelectedAddress.text = "";
+    ordersSelectedComment.text = "";
+    ordersSelectedName.text = "";
+    ordersSelectedPrice.text = "";
+  }
+
+  makeAnOrder() {
+    String titleOfOrder = ordersSelectedName.text;
+    String address = ordersSelectedAddress.text;
+    int price = int.parse(ordersSelectedPrice.text);
+    String description = ordersSelectedComment.text;
+    Order newOrder = Order(
+      title: titleOfOrder,
+      author: 'Евгения',
+      description: address,
+      avatar: AssetImage("assets/images/wat.png"),
+      price: price,
+    );
+    setState(() {
+      orders.add(newOrder);
+      clearTextControllers();
+    });
   }
 
   @override
@@ -286,6 +276,8 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
       ),
     );
 
+    List<String> ordersVariant = ["Прическа", "Брови", "Ресницы", "Ногти"];
+
     var orderForm = Container(
       padding: EdgeInsets.only(left: 20, right: 20, top: 20),
       margin: EdgeInsets.only(top: 100),
@@ -297,57 +289,97 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
             height: 70,
             child: Center(
               child: Text(
-                "Сделать заказ",
+                "Заказать услугу",
                 style: TextStyle(fontSize: 24),
               ),
             ),
           ),
           Container(
-              height: 70,
-              child: Row(
+              height: 280,
+              child: Column(
                 children: [
-                  Expanded(flex: 1, child: Text("Название:")),
-                  Expanded(flex: 2, child: TextField())
+                  Expanded(
+                      child: Container(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: TextField(
+                      controller: ordersSelectedName,
+                      decoration: InputDecoration(
+                          hintText:
+                              "Введите название (Например: Пострич волосы)",
+                          hintStyle: TextStyle(fontSize: 13),
+                          labelText: "Название",
+                          border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(0.0)))),
+                    ),
+                  )),
+                  Expanded(
+                      child: Container(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: TextField(
+                      controller: ordersSelectedAddress,
+                      decoration: InputDecoration(
+                          hintText: "По умолчанию: Территория исполнителя",
+                          hintStyle: TextStyle(fontSize: 13),
+                          labelText: "Адрес",
+                          border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(0.0)))),
+                    ),
+                  )),
+                  Expanded(
+                      child: Container(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: TextField(
+                      controller: ordersSelectedPrice,
+                      decoration: InputDecoration(
+                          hintText: "Укажите предлагаемую цену в рублях",
+                          hintStyle: TextStyle(fontSize: 13),
+                          labelText: "Цена",
+                          border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(0.0)))),
+                      keyboardType: TextInputType.number,
+                    ),
+                  )),
+                  Expanded(
+                      child: Container(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: TextField(
+                      controller: ordersSelectedComment,
+                      decoration: InputDecoration(
+                          hintText: "Дополнительное инфо (Необязаельное поле)",
+                          hintStyle: TextStyle(fontSize: 13),
+                          labelText: "Комментарий",
+                          border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(0.0)))),
+                    ),
+                  )),
+                  ElevatedButton(
+                    onPressed: makeAnOrder,
+                    child: Container(
+                        width: 200,
+                        height: 50,
+                        child: Center(
+                            child: Text(
+                          "Отправить",
+                          style: TextStyle(fontSize: 18),
+                        ))),
+                  )
                 ],
               )),
-          Container(
-              height: 70,
-              child: Row(
-                children: [
-                  Expanded(flex: 1, child: Text("Место:")),
-                  Expanded(flex: 2, child: TextField())
-                ],
-              )),
-          Container(
-              height: 70,
-              child: Row(
-                children: [
-                  Expanded(flex: 1, child: Text("Цена:")),
-                  Expanded(flex: 2, child: TextField())
-                ],
-              )),
-          Container(
-              height: 70,
-              child: Row(
-                children: [
-                  Expanded(flex: 1, child: Text("Комментарий:")),
-                  Expanded(flex: 2, child: TextField())
-                ],
-              )),
-          ElevatedButton(
-            onPressed: () {},
-            child: Text("Заказать"),
-          )
         ],
       ),
     );
-    List<Widget> freelanserWidgets = [filterInfo, filterForm, ordersList];
-    List<Widget> userWidgets = [orderForm];
-    return Column(
-      //||||||||||||||||||||||||MAIN||||||||||||||||||
-      children:
-          context.watch<Data>().isUserClient ? userWidgets : freelanserWidgets,
-    );
+
+    Container freelanserWidgets = Container(
+        child: Column(children: [filterInfo, filterForm, ordersList]));
+    SingleChildScrollView userWidgets = SingleChildScrollView(child: orderForm);
+    //||||||||||||||||||||||||MAIN||||||||||||||||||
+    return context.watch<Profile>().isUserClient
+        ? userWidgets
+        : freelanserWidgets;
   }
 }
 

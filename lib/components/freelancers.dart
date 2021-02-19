@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:real/domain/order.dart';
+import 'package:real/models/order.dart';
 
 class Freelancers extends StatefulWidget {
   Freelancers({Key key}) : super(key: key);
@@ -226,41 +226,30 @@ class _FreelancersState extends State<Freelancers> {
         ),
       ),
     );
-    var pageView = PageView(
-      pageSnapping: false,
-      physics: BouncingScrollPhysics(),
-      children: [
-        Container(
-          height: 50,
-          color: Colors.red,
-          child: Center(
-            child: Text('first'),
-          ),
-        ),
-        Container(
-          height: 50,
-          color: Colors.red,
-          child: Center(
-            child: Text('first'),
-          ),
-        ),
-        Container(
-          height: 50,
-          color: Colors.red,
-          child: Center(
-            child: Text('first'),
-          ),
-        ),
+    var tabBar = TabBar(
+      tabs: <Widget>[
+        Tab(text: "Freelancers"),
+        Tab(text: "Salons"),
       ],
     );
-    return Column(
+
+    var freelancersTab = Column(
       children: <Widget>[
         filterInfo,
         filterForm,
-        // pageView,
         workoutsList,
       ],
     );
+    var salonsTab = Column(
+      children: <Widget>[
+        workoutsList,
+      ],
+    );
+    return DefaultTabController(
+        length: tabBar.tabs.length,
+        child: Scaffold(
+            appBar: AppBar(title: tabBar),
+            body: TabBarView(children: <Widget>[freelancersTab, salonsTab])));
   }
 }
 

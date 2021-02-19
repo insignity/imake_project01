@@ -7,14 +7,15 @@ import 'package:real/pages/home.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'models/data.dart';
+import 'models/user.dart';
 
 void main() => runApp(RealApp());
 
 class RealApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<Data>(
-      create: (context) => Data(),
+    return ChangeNotifierProvider<Profile>(
+      create: (context) => Profile(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Real App',
