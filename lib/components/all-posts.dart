@@ -5,9 +5,9 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 List<IntSize> _createSizes(int count) {
-  Random rnd = new Random();
-  return new List.generate(count,
-      (i) => new IntSize((rnd.nextInt(500) + 200), rnd.nextInt(500) + 100));
+  Random rnd = Random();
+  return List.generate(
+      count, (i) => IntSize((rnd.nextInt(500) + 200), rnd.nextInt(500) + 100));
 }
 
 class AllPosts extends StatelessWidget {
@@ -18,8 +18,8 @@ class AllPosts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new StaggeredGridView.countBuilder(
+    return Scaffold(
+      body: StaggeredGridView.countBuilder(
         primary: false,
         crossAxisCount: 2,
         mainAxisSpacing: 1.0,
@@ -46,39 +46,41 @@ class _Tile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Card(
-      child: new Column(
+    return Card(
+      child: Column(
         children: <Widget>[
-          new Stack(
+          Stack(
             children: <Widget>[
-              new Center(
-                child: new FadeInImage.memoryNetwork(
-                  fadeInDuration: Duration(milliseconds: 500),
-                  placeholder: kTransparentImage,
-                  image: 'https://picsum.photos/${size.width}/${size.height}/',
+              Container(
+                child: Column(
+                  children: [
+                    FadeInImage.memoryNetwork(
+                      fadeInDuration: Duration(milliseconds: 500),
+                      placeholder: kTransparentImage,
+                      fit: BoxFit.cover,
+                      image:
+                          'https://picsum.photos/${size.width}/${size.height}/',
+                    ),
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.favorite_border,
+                            color: Colors.red,
+                          ),
+                          Text(
+                            '@User#${size.height}',
+                            style: const TextStyle(color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               ),
             ],
           ),
-          new Padding(
-            padding: const EdgeInsets.all(1.0),
-            child: new Column(
-              children: <Widget>[
-                new Text(
-                  'User number $index',
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                new Text(
-                  'Width: ${size.width}',
-                  style: const TextStyle(color: Colors.grey),
-                ),
-                new Text(
-                  'Height: ${size.height}',
-                  style: const TextStyle(color: Colors.grey),
-                ),
-              ],
-            ),
-          )
         ],
       ),
     );

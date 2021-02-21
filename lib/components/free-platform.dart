@@ -1,12 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:real/domain/list_of_orders.dart';
 import 'package:real/models/order.dart';
 import 'dart:math';
 import 'package:provider/provider.dart';
-import 'package:real/models/data.dart';
-import 'package:dropdownfield/dropdownfield.dart';
-import 'package:real/models/user.dart';
+import 'package:real/models/profile.dart';
 
 class FreePlatformPage extends StatefulWidget {
   FreePlatformPage({Key key}) : super(key: key);
@@ -20,6 +19,25 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
   void initState() {
     clearFilter();
     super.initState();
+  }
+
+  createAlertDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return CupertinoAlertDialog(
+            title: Text("Внимение"),
+            content: Text("Введите пожалуйста название и цену заказа!"),
+            actions: [
+              CupertinoDialogAction(
+                child: Text("Ок"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
   }
 
   var filterOnlyMyWorkouts = false;
@@ -57,31 +75,312 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
 
   final ordersSelectedName = TextEditingController();
   final ordersSelectedAddress = TextEditingController();
+  final ordersSelectedDate = TextEditingController();
   final ordersSelectedPrice = TextEditingController();
   final ordersSelectedComment = TextEditingController();
   clearTextControllers() {
-    ordersSelectedAddress.text = "";
-    ordersSelectedComment.text = "";
     ordersSelectedName.text = "";
+    ordersSelectedAddress.text = "";
+    ordersSelectedDate.text = "";
     ordersSelectedPrice.text = "";
+    ordersSelectedComment.text = "";
   }
 
-  makeAnOrder() {
+  Widget makeAnOrder() {
     String titleOfOrder = ordersSelectedName.text;
     String address = ordersSelectedAddress.text;
-    int price = int.parse(ordersSelectedPrice.text);
-    String description = ordersSelectedComment.text;
-    Order newOrder = Order(
-      title: titleOfOrder,
-      author: 'Евгения',
-      description: address,
-      avatar: AssetImage("assets/images/wat.png"),
-      price: price,
-    );
-    setState(() {
-      orders.add(newOrder);
-      clearTextControllers();
-    });
+    String price = ordersSelectedPrice.text;
+    String date = ordersSelectedDate.text;
+    String comment = ordersSelectedComment.text;
+    if ((titleOfOrder == "") || (price == "")) {
+      print('sdfsdfsdf');
+      return createAlertDialog(context);
+    } else {
+      if (address == "") address = "На вашей территории";
+      if (date == "") date = "Сейчас";
+      if (comment != "") date += "Комментарий " + comment;
+      Order newOrder = Order(
+        title: titleOfOrder,
+        author: 'Евгения',
+        address: address,
+        date: date,
+        avatar: AssetImage("assets/images/wat.png"),
+        price: int.parse(price),
+      );
+      setState(() {
+        orders.add(newOrder);
+        clearTextControllers();
+      });
+      return CupertinoAlertDialog(
+        title: Text("!"),
+        actions: [CupertinoDialogAction(child: Text("Ьеп"))],
+      );
+    }
+  }
+
+  createOrderDialog(BuildContext context, int index, int price) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return Container(
+            child: FractionallySizedBox(
+              widthFactor: 0.8,
+              heightFactor: 0.7,
+              child: Container(
+                  padding: EdgeInsets.all(5),
+                  decoration:
+                      BoxDecoration(color: Color.fromRGBO(50, 65, 85, 0.8)),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 5,
+                              child: Container(
+                                  //======avatar container==============
+                                  padding: EdgeInsets.only(top: 2),
+                                  child: Column(
+                                    children: [
+                                      CircleAvatar(
+                                          radius: 30,
+                                          backgroundImage:
+                                              orders[index].avatar),
+                                      Text(orders[index].author,
+                                          style: TextStyle(
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .headline1
+                                                .color,
+                                          )),
+                                      subtitle(context, orders[index]),
+                                    ],
+                                  ),
+                                  decoration: BoxDecoration(
+                                      border: Border(
+                                          right: BorderSide(
+                                              width: 1,
+                                              color: Colors.white24)))),
+                            ),
+                            Expanded(
+                                //=======================DESCRIPTION============================
+                                flex: 11,
+                                child: Container(
+                                    alignment: Alignment.topLeft,
+                                    padding: EdgeInsets.only(
+                                        top: 1, left: 10, right: 10, bottom: 2),
+                                    child: Column(children: [
+                                      Container(
+                                        //-----------------------TITLE
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          orders[index].title,
+                                          style: TextStyle(
+                                              color: Theme.of(context)
+                                                  .textTheme
+                                                  .headline1
+                                                  .color,
+                                              fontWeight: FontWeight.bold),
+                                          textAlign: TextAlign.left,
+                                        ),
+                                      ),
+                                      Container(
+                                        //--------------------DESCRIPTION
+                                        alignment: Alignment.topLeft,
+                                        padding: EdgeInsets.only(top: 5),
+                                        child: Text(
+                                          orders[index].address,
+                                          style: TextStyle(
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .headline2
+                                                .color,
+                                          ),
+                                          textAlign: TextAlign.left,
+                                        ),
+                                      ),
+                                      Container(
+                                        //--------------------DATE
+                                        alignment: Alignment.topLeft,
+                                        padding: EdgeInsets.only(top: 5),
+                                        child: Text(
+                                          orders[index].date,
+                                          style: TextStyle(
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .headline2
+                                                .color,
+                                          ),
+                                          textAlign: TextAlign.left,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        //----------PRICE
+                                        flex: 1,
+                                        child: Container(
+                                          alignment: Alignment.bottomLeft,
+                                          child: Text(
+                                            orders[index].price.toString(),
+                                            style: TextStyle(
+                                              color: Colors.red,
+                                            ),
+                                            textAlign: TextAlign.left,
+                                          ),
+                                        ),
+                                      ),
+                                    ]))), //================================================
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                          flex: 3,
+                          child: Center(
+                            child: Text(
+                              "Map",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          )),
+                      Expanded(
+                          flex: 4,
+                          child: Container(
+                            decoration: BoxDecoration(
+                                border: Border(
+                                    top: BorderSide(
+                                        width: 1, color: Colors.white24))),
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                ElevatedButton(
+                                  style: ElevatedButtonTheme.of(context).style,
+                                  onPressed: () {},
+                                  child: FractionallySizedBox(
+                                    widthFactor: 0.8,
+                                    child: Center(
+                                      child: Text(
+                                        "Принять за $price",
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .secondaryHeaderColor,
+                                            fontSize: 18),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 50,
+                                  child: Center(
+                                    child: Text(
+                                      "Предложить за ",
+                                      style: TextStyle(
+                                        color: Theme.of(context)
+                                            .secondaryHeaderColor,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                FractionallySizedBox(
+                                  widthFactor: 0.8,
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        //+50-------
+                                        child: Container(
+                                          width: 80,
+                                          child: ElevatedButton(
+                                            style:
+                                                ElevatedButtonTheme.of(context)
+                                                    .style,
+                                            onPressed: () {},
+                                            child: Center(
+                                              child: Text(
+                                                (price + 50).toString(),
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .secondaryHeaderColor,
+                                                    fontSize: 18),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        //+150-------
+                                        child: Container(
+                                          width: 80,
+                                          child: ElevatedButton(
+                                            style:
+                                                ElevatedButtonTheme.of(context)
+                                                    .style,
+                                            onPressed: () {},
+                                            child: Center(
+                                              child: Text(
+                                                (price + 150).toString(),
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .secondaryHeaderColor,
+                                                    fontSize: 18),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        //+250-------
+                                        child: Container(
+                                          width: 80,
+                                          child: ElevatedButton(
+                                            style:
+                                                ElevatedButtonTheme.of(context)
+                                                    .style,
+                                            onPressed: () {},
+                                            child: Center(
+                                              child: Text(
+                                                (price + 250).toString(),
+                                                style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .secondaryHeaderColor,
+                                                    fontSize: 18),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                ElevatedButton(
+                                  style: ElevatedButtonTheme.of(context).style,
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: FractionallySizedBox(
+                                    widthFactor: 0.8,
+                                    child: Center(
+                                      child: Text(
+                                        "Назад",
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .secondaryHeaderColor,
+                                            fontSize: 18),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ))
+                    ],
+                  )),
+            ),
+          );
+        });
   }
 
   @override
@@ -93,104 +392,126 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
               return Card(
                 elevation: 2.0,
                 margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                child: Container(
-                    height: 100,
-                    decoration:
-                        BoxDecoration(color: Color.fromRGBO(50, 65, 85, 0.8)),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 4,
-                          child: Container(
-                              padding: EdgeInsets.only(top: 2),
-                              child: Column(
-                                children: [
-                                  CircleAvatar(
-                                      radius: 30,
-                                      backgroundImage: orders[index].avatar),
-                                  Text(orders[index].author,
-                                      style: TextStyle(
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .headline1
-                                            .color,
-                                      )),
-                                  subtitle(context, orders[index]),
-                                ],
-                              ),
-                              decoration: BoxDecoration(
-                                  border: Border(
-                                      right: BorderSide(
-                                          width: 1, color: Colors.white24)))),
-                        ),
-                        Expanded(
-                            //===========================================================
-                            flex: 11,
+                child: InkWell(
+                  onTap: () {
+                    createOrderDialog(context, index, orders[index].price);
+                  },
+                  child: Container(
+                      height: 100,
+                      decoration:
+                          BoxDecoration(color: Color.fromRGBO(50, 65, 85, 0.8)),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 4,
                             child: Container(
-                                alignment: Alignment.topLeft,
-                                padding: EdgeInsets.only(
-                                    top: 1, left: 10, right: 10, bottom: 2),
-                                child: Column(children: [
-                                  Container(
-                                    //-----------------------TITLE
-                                    alignment: Alignment.topLeft,
-                                    child: Text(
-                                      orders[index].title,
-                                      style: TextStyle(
+                                padding: EdgeInsets.only(top: 2),
+                                child: Column(
+                                  children: [
+                                    CircleAvatar(
+                                        radius: 30,
+                                        backgroundImage: orders[index].avatar),
+                                    Text(orders[index].author,
+                                        style: TextStyle(
                                           color: Theme.of(context)
                                               .textTheme
                                               .headline1
                                               .color,
-                                          fontWeight: FontWeight.bold),
-                                      textAlign: TextAlign.left,
-                                    ),
-                                  ),
-                                  Container(
-                                    //--------------------DESCRIPTION
-                                    alignment: Alignment.topLeft,
-                                    padding: EdgeInsets.only(top: 5),
-                                    child: Text(
-                                      orders[index].description,
-                                      style: TextStyle(
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .headline2
-                                            .color,
-                                      ),
-                                      textAlign: TextAlign.left,
-                                    ),
-                                  ),
-                                  Expanded(
-                                    //----------PRICE
-                                    flex: 1,
-                                    child: Container(
-                                      alignment: Alignment.bottomLeft,
+                                        )),
+                                    subtitle(context, orders[index]),
+                                  ],
+                                ),
+                                decoration: BoxDecoration(
+                                    border: Border(
+                                        right: BorderSide(
+                                            width: 1, color: Colors.white24)))),
+                          ),
+                          Expanded(
+                              //===========================================================
+                              flex: 11,
+                              child: Container(
+                                  alignment: Alignment.topLeft,
+                                  padding: EdgeInsets.only(
+                                      top: 1, left: 10, right: 10, bottom: 2),
+                                  child: Column(children: [
+                                    Container(
+                                      //-----------------------TITLE
+                                      alignment: Alignment.topLeft,
                                       child: Text(
-                                        orders[index].price.toString(),
+                                        orders[index].title,
                                         style: TextStyle(
-                                          color: Colors.red,
+                                            color: Theme.of(context)
+                                                .textTheme
+                                                .headline1
+                                                .color,
+                                            fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ),
+                                    Container(
+                                      //--------------------DESCRIPTION
+                                      alignment: Alignment.topLeft,
+                                      padding: EdgeInsets.only(top: 5),
+                                      child: Text(
+                                        orders[index].address,
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .headline2
+                                              .color,
                                         ),
                                         textAlign: TextAlign.left,
                                       ),
                                     ),
-                                  ),
-                                ]))), //================================================
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                              height: 100,
-                              child: Icon(
-                                Icons.keyboard_arrow_right,
-                                color:
-                                    Theme.of(context).textTheme.headline1.color,
-                              ),
-                              decoration: BoxDecoration(
-                                  border: Border(
-                                      left: BorderSide(
-                                          width: 1, color: Colors.white24)))),
-                        )
-                      ],
-                    )),
+                                    Container(
+                                      //--------------------DATE
+                                      alignment: Alignment.topLeft,
+                                      padding: EdgeInsets.only(top: 5),
+                                      child: Text(
+                                        orders[index].date,
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .textTheme
+                                              .headline2
+                                              .color,
+                                        ),
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      //----------PRICE
+                                      flex: 1,
+                                      child: Container(
+                                        alignment: Alignment.bottomLeft,
+                                        child: Text(
+                                          orders[index].price.toString(),
+                                          style: TextStyle(
+                                            color: Colors.red,
+                                          ),
+                                          textAlign: TextAlign.left,
+                                        ),
+                                      ),
+                                    ),
+                                  ]))), //================================================
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                                height: 100,
+                                child: Icon(
+                                  Icons.keyboard_arrow_right,
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .headline1
+                                      .color,
+                                ),
+                                decoration: BoxDecoration(
+                                    border: Border(
+                                        left: BorderSide(
+                                            width: 1, color: Colors.white24)))),
+                          )
+                        ],
+                      )),
+                ),
               );
             }));
     var filterInfo = Container(
@@ -295,7 +616,7 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
             ),
           ),
           Container(
-              height: 280,
+              height: 350,
               child: Column(
                 children: [
                   Expanded(
@@ -304,8 +625,7 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
                     child: TextField(
                       controller: ordersSelectedName,
                       decoration: InputDecoration(
-                          hintText:
-                              "Введите название (Например: Пострич волосы)",
+                          hintText: "Введите название (напр.: Парикмахер)",
                           hintStyle: TextStyle(fontSize: 13),
                           labelText: "Название",
                           border: OutlineInputBorder(
@@ -322,6 +642,20 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
                           hintText: "По умолчанию: Территория исполнителя",
                           hintStyle: TextStyle(fontSize: 13),
                           labelText: "Адрес",
+                          border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(0.0)))),
+                    ),
+                  )),
+                  Expanded(
+                      child: Container(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child: TextField(
+                      controller: ordersSelectedDate,
+                      decoration: InputDecoration(
+                          hintText: "По умолчанию: Сейчас",
+                          hintStyle: TextStyle(fontSize: 13),
+                          labelText: "Дата и время",
                           border: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(0.0)))),
@@ -348,7 +682,7 @@ class _FreePlatformPageState extends State<FreePlatformPage> {
                     child: TextField(
                       controller: ordersSelectedComment,
                       decoration: InputDecoration(
-                          hintText: "Дополнительное инфо (Необязаельное поле)",
+                          hintText: "Доп. информация (необязаельное поле)",
                           hintStyle: TextStyle(fontSize: 13),
                           labelText: "Комментарий",
                           border: OutlineInputBorder(

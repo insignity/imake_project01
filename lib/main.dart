@@ -7,7 +7,7 @@ import 'package:real/pages/home.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'models/data.dart';
-import 'models/user.dart';
+import 'models/profile.dart';
 
 void main() => runApp(RealApp());
 
@@ -28,6 +28,16 @@ class RealApp extends StatelessWidget {
                 color: Colors.white70,
                 fontSize: 10,
                 fontWeight: FontWeight.normal),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+                primary: Color.fromRGBO(132, 141, 153, 1),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50.0),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                textStyle:
+                    TextStyle(fontSize: 18, fontWeight: FontWeight.normal)),
           ),
         ),
         home: HomePage(),

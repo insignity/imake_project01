@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:real/components/free-platform.dart';
 import 'package:real/components/all-posts.dart';
 import 'package:real/components/freelancers.dart';
-import 'package:real/components/profile.dart';
+import 'package:real/components/profile_component.dart';
+import 'package:real/components/camera_component.dart';
 import 'package:real/models/data.dart';
 import 'package:provider/provider.dart';
 
@@ -48,7 +49,7 @@ class _HomePageState extends State<HomePage> {
           return Freelancers();
           break;
         case 2:
-          return Freelancers();
+          return CameraComponent();
           break;
         case 3:
           return AllPosts();
@@ -68,7 +69,7 @@ class _HomePageState extends State<HomePage> {
           return 'Representatives';
           break;
         case 2:
-          return 'Representatives';
+          return 'CameraComponent';
           break;
         case 3:
           return 'AllPosts';

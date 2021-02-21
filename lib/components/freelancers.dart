@@ -19,31 +19,31 @@ class _FreelancersState extends State<Freelancers> {
     Order(
         title: 'Брови, ресницы, ногти',
         author: 'Александра',
-        description: 'test1',
+        address: 'test1',
         level: 'Beginner',
         avatar: AssetImage('assets/images/people/1.png')),
     Order(
         title: 'Test2',
         author: 'Нина',
-        description: 'test2',
+        address: 'test2',
         level: 'Intermediate',
         avatar: AssetImage('assets/images/people/2.png')),
     Order(
         title: 'Test3',
         author: 'Виктория',
-        description: 'test3',
+        address: 'test3',
         level: 'Beginner',
         avatar: AssetImage('assets/images/people/3.png')),
     Order(
         title: 'Test4',
         author: 'Петр',
-        description: 'test4',
+        address: 'test4',
         level: 'Intermediate',
         avatar: AssetImage('assets/images/people/4.png')),
     Order(
         title: 'Test5',
         author: 'Анатолий',
-        description: 'test5',
+        address: 'test5',
         level: 'Advanced',
         avatar: AssetImage('assets/images/people/5.png')),
   ];

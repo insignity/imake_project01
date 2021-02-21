@@ -20,4 +20,8 @@ class Profile with ChangeNotifier {
   }
 
   Profile({this.name, this.imageSource});
+  Profile.currentUser() {
+    name = "Валентина";
+    imageSource = 'assets/images/wat.png';
+  }
 }
