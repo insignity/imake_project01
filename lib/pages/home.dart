@@ -3,11 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:real/components/free-platform.dart';
 import 'package:real/components/all-posts.dart';
-import 'package:real/components/freelancers.dart';
+import 'package:real/components/search.dart';
 import 'package:real/components/profile_component.dart';
 import 'package:real/components/camera_component.dart';
-import 'package:real/models/data.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);

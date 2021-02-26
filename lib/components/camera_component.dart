@@ -73,7 +73,7 @@ class _CameraComponentState extends State<CameraComponent> {
       children: [
         Expanded(
           flex: 1,
-          child: Container(),
+          child: SizedBox(),
         ),
         Expanded(
           flex: 1,
@@ -148,7 +148,7 @@ class _CameraComponentState extends State<CameraComponent> {
         ),
         Expanded(
           flex: 1,
-          child: Container(),
+          child: SizedBox(),
         ),
       ],
     ));

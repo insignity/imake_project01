@@ -1,13 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:real/pages/auth.dart';
 import 'package:real/pages/home.dart';
 import 'package:flutter/cupertino.dart';
-
-import 'models/data.dart';
 import 'models/profile.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() => runApp(RealApp());
 
@@ -17,6 +14,25 @@ class RealApp extends StatelessWidget {
     return ChangeNotifierProvider<Profile>(
       create: (context) => Profile(),
       child: MaterialApp(
+        localizationsDelegates: [
+          GlobalCupertinoLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          DefaultCupertinoLocalizations.delegate
+        ],
+        supportedLocales: [
+          const Locale('en', 'US'),
+          const Locale('ru', 'RU'),
+        ],
+        localeResolutionCallback: (locale, supportedLocales) {
+          for (var supportedLocale in supportedLocales) {
+            if (supportedLocale.languageCode == locale.languageCode &&
+                supportedLocale.countryCode == locale.countryCode) {
+              return supportedLocale;
+            }
+          }
+          return supportedLocales.last;
+        },
         debugShowCheckedModeBanner: false,
         title: 'Real App',
         theme: ThemeData(
@@ -40,7 +56,7 @@ class RealApp extends StatelessWidget {
                     TextStyle(fontSize: 18, fontWeight: FontWeight.normal)),
           ),
         ),
-        home: HomePage(),
+        home: AuthorizationPage(),
         routes: {
           '/start': (BuildContext context) => RealApp(),
           '/auth': (BuildContext context) => AuthorizationPage(),

@@ -1,5 +1,6 @@
 import 'dart:io';
-
+import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -67,6 +68,7 @@ class _HistoryPageState extends State<HistoryPage> {
       );
       setState(() {
         imageFile = cropper;
+        print("PRIIIIIIIIINT" + cropper.toString());
       });
     }
     Navigator.of(context).pop();
@@ -112,7 +114,7 @@ class _HistoryPageState extends State<HistoryPage> {
             Expanded(
               flex: 2,
               child: Container(
-                padding: EdgeInsets.only(left: 10),
+                padding: EdgeInsets.only(left: 10, right: 10),
                 child: InkWell(
                     onTap: () => _showChoiceDialog(context),
                     child: Image.asset(currentUser.imageSource)),
@@ -144,8 +146,9 @@ class _HistoryPageState extends State<HistoryPage> {
               ),
               SingleChildScrollView(
                 child: Container(
-                  height: 500,
-                  color: Colors.grey,
+                  height: 400,
+                  color: Theme.of(context).primaryColor,
+                  child: Image.asset('assets/images/diagram.PNG'),
                 ),
               ),
             ],
