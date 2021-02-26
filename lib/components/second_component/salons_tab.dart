@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:real/components/second_component/swiper.dart';
 import 'package:real/lists/salons.dart';
 
 import 'filter_second.dart';
@@ -202,6 +203,7 @@ class _SalonsTabState extends State<SalonsTab> {
     var salonsTab = Column(
       children: <Widget>[
         FilterSecond(),
+        SwiperView(),
         salonsView,
       ],
     );
