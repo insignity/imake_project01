@@ -138,7 +138,7 @@ class AuthorizationPageState extends State<AuthorizationPage> {
                   color: Theme.of(context).primaryColor,
                   fontSize: 20)),
           onPressed: () {
-            Navigator.pushNamed(context, '/home');
+            Navigator.pushNamed(context, '/auth/sms');
           });
     }
 
