@@ -7,7 +7,7 @@ class SwiperView extends StatelessWidget {
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 4),
         height: 120,
-        child: Expanded(
+        child: Container(
             child: ListView.builder(
                 itemCount: 6,
                 scrollDirection: Axis.horizontal,

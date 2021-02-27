@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:real/components/second_component/swiper.dart';
+import 'package:real/lists/sales.dart';
 import 'package:real/lists/salons.dart';
 
 import 'filter_second.dart';
@@ -23,9 +24,145 @@ class _SalonsTabState extends State<SalonsTab> {
     return showDialog(
         context: context,
         builder: (context) {
+          var header = Expanded(
+            flex: 1,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                      height: 100,
+                      alignment: Alignment.topLeft,
+                      //======avatar container==============
+                      padding: EdgeInsets.only(top: 2),
+                      child: Column(
+                        children: [
+                          CircleAvatar(
+                              radius: 30,
+                              backgroundImage: salons[index].avatar),
+                          Text(salons[index].author,
+                              style: TextStyle(
+                                color:
+                                    Theme.of(context).textTheme.headline1.color,
+                              )),
+                          subtitle(context, salons[index]),
+                        ],
+                      ),
+                      decoration: BoxDecoration(
+                          border: Border(
+                              right: BorderSide(
+                                  width: 1, color: Colors.white24)))),
+                ),
+                Expanded(
+                    flex: 6,
+                    child: Container(
+                      padding: EdgeInsets.only(top: 20),
+                      height: 180,
+                      child: Column(
+                        children: [
+                          Container(
+                            child: Text(
+                              "Парикмахерская",
+                              style: TextStyle(
+                                  color:
+                                      Theme.of(context).secondaryHeaderColor),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(top: 20),
+                            child: Text(
+                              "Адрес: ул. Курашова д. 24",
+                              style: TextStyle(
+                                  color:
+                                      Theme.of(context).secondaryHeaderColor),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(top: 20),
+                            child: Text(
+                              "Статус: Есть свободные мастера",
+                              style: TextStyle(
+                                  color:
+                                      Theme.of(context).secondaryHeaderColor),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ))
+              ],
+            ),
+          );
+          var photos = Container(
+              height: 150,
+              child: ListView.builder(
+                  itemCount: 6,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return Card(
+                        elevation: 1.0,
+                        child: InkWell(
+                            onTap: () {},
+                            child: Container(
+                                height: 100,
+                                width: 200,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        fit: BoxFit.fill,
+                                        image: sales[index].image),
+                                    color: Color.fromRGBO(50, 65, 85, 0.8)),
+                                child: Row(children: [
+                                  Expanded(
+                                    flex: 4,
+                                    child: Container(
+                                        padding: EdgeInsets.only(top: 70),
+                                        child: Column(
+                                          children: [
+                                            Text("Фото",
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.black45,
+                                                )),
+                                          ],
+                                        ),
+                                        decoration: BoxDecoration(
+                                            border: Border(
+                                                right: BorderSide(
+                                                    width: 1,
+                                                    color: Colors.white24)))),
+                                  ),
+                                ]))));
+                  }));
+          var listViewServices = Container(
+            padding: EdgeInsets.only(top: 10),
+            height: 50,
+            child: ListView.builder(
+                itemCount: 6,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return Container(
+                      margin: EdgeInsets.symmetric(horizontal: 3),
+                      height: 50,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Theme.of(context).secondaryHeaderColor,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(200))),
+                      child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          child: Center(
+                            child: Text(
+                              "Прически " + index.toString(),
+                              style: TextStyle(
+                                  color:
+                                      Theme.of(context).secondaryHeaderColor),
+                            ),
+                          )));
+                }),
+          );
           return Container(
             child: FractionallySizedBox(
-              widthFactor: 0.8,
+              widthFactor: 0.9,
               heightFactor: 0.7,
               child: Container(
                   padding: EdgeInsets.all(5),
@@ -33,51 +170,35 @@ class _SalonsTabState extends State<SalonsTab> {
                       BoxDecoration(color: Color.fromRGBO(50, 65, 85, 0.8)),
                   child: Column(
                     children: [
+                      header,
                       Expanded(
-                        flex: 1,
-                        child: Row(
+                        flex: 3,
+                        child: Column(
                           children: [
-                            Expanded(
-                              flex: 3,
-                              child: Container(
-                                  height: 100,
-                                  alignment: Alignment.topLeft,
-                                  //======avatar container==============
-                                  padding: EdgeInsets.only(top: 2),
-                                  child: Column(
-                                    children: [
-                                      CircleAvatar(
-                                          radius: 30,
-                                          backgroundImage:
-                                              salons[index].avatar),
-                                      Text(salons[index].author,
-                                          style: TextStyle(
-                                            color: Theme.of(context)
-                                                .textTheme
-                                                .headline1
-                                                .color,
-                                          )),
-                                      subtitle(context, salons[index]),
-                                    ],
-                                  ),
-                                  decoration: BoxDecoration(
-                                      border: Border(
-                                          right: BorderSide(
-                                              width: 1,
-                                              color: Colors.white24)))),
+                            photos,
+                            listViewServices,
+                            Container(
+                                padding: EdgeInsets.all(10),
+                                height: 150,
+                                child: Text(
+                                    "Описание: это уход за волосами путем их окрашивания, стрижки, укладки или наращивания для удовлетворения потребностей клиента и придания его внешнему виду свежести, ухоженности и красоты.",
+                                    textAlign: TextAlign.justify,
+                                    style: TextStyle(
+                                      color: Theme.of(context)
+                                          .secondaryHeaderColor,
+                                    ))),
+                            Container(
+                              alignment: Alignment.bottomCenter,
+                              child: ElevatedButton(
+                                  onPressed: () {},
+                                  child: Container(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 30),
+                                      child: Text("Записаться"))),
                             ),
-                            Expanded(flex: 6, child: Container())
                           ],
                         ),
-                      ),
-                      Expanded(
-                          flex: 3,
-                          child: Center(
-                            child: Text(
-                              "Страница салона",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          )),
+                      )
                     ],
                   )),
             ),

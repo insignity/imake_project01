@@ -1,10 +1,7 @@
 import 'dart:io';
-import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:real/domain/current_profile.dart';
 import 'package:provider/provider.dart';
 import 'package:real/models/profile.dart';
 import 'dart:async';
