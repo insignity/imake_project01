@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:real/models/profile.dart';
+import 'package:real/entity/profile.dart';
 import 'dart:async';
 
 class HistoryPage extends StatefulWidget {

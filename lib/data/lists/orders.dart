@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../models/order.dart';
+import 'package:real/entity/order.dart';
 
 List orders = <Order>[
   Order(

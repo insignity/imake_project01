@@ -1,12 +1,12 @@
 import 'package:sms_autofill/sms_autofill.dart';
 import 'package:flutter/material.dart';
 
-class SmsPage extends StatefulWidget {
+class ConfirmPage extends StatefulWidget {
   @override
-  _SmsPageState createState() => _SmsPageState();
+  _ConfirmPageState createState() => _ConfirmPageState();
 }
 
-class _SmsPageState extends State<SmsPage> {
+class _ConfirmPageState extends State<ConfirmPage> {
   String _code;
   String signature = "{{ app signature }}";
 
@@ -67,7 +67,7 @@ class _SmsPageState extends State<SmsPage> {
               Spacer(),
               RaisedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, "/auth/sms/home");
+                  Navigator.pushNamed(context, "/home");
                 },
                 child: Text("ОК"),
               ),

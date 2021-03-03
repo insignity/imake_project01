@@ -1,11 +1,11 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:real/components/free-platform.dart';
-import 'package:real/components/all-posts.dart';
-import 'package:real/components/search.dart';
-import 'package:real/components/profile_component.dart';
-import 'package:real/components/camera_component.dart';
+import 'package:real/ui/free-platform.dart';
+import 'package:real/ui/all-posts.dart';
+import 'package:real/ui/search.dart';
+import 'package:real/ui/profile_component.dart';
+import 'package:real/ui/camera_component.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);

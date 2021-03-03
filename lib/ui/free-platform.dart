@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:real/components/first_component/client_form.dart';
-import 'package:real/components/first_component/freelancer_form.dart';
 import 'package:provider/provider.dart';
-import 'package:real/models/profile.dart';
+import 'package:real/entity/profile.dart';
+import 'package:real/ui/first_component/client_form.dart';
+import 'package:real/ui/first_component/freelancer_form.dart';
 
 class FreePlatformPage extends StatefulWidget {
   FreePlatformPage({Key key}) : super(key: key);

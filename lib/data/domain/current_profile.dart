@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:real/models/profile.dart';
 
 class CurrentProfile {
   String _name;

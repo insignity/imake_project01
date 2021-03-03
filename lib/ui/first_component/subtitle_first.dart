@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:real/models/order.dart';
+import 'package:real/entity/order.dart';
 
 Widget subtitle(BuildContext context, Order order) {
   //Лайки расстояиние

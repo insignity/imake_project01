@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:real/lists/freelancers.dart';
+import 'package:real/data/lists/freelancers.dart';
 
 import 'filter_second.dart';
 import 'subtitle_second.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:real/lists/orders.dart';
-import 'package:real/models/order.dart';
+import 'package:real/entity/order.dart';
+import 'package:real/data/lists/orders.dart';
 
 class ClientForm extends StatefulWidget {
   ClientForm({Key key}) : super(key: key);

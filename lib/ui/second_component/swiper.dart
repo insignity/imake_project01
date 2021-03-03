@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:real/lists/sales.dart';
+import 'package:real/data/lists/sales.dart';
 
 class SwiperView extends StatelessWidget {
   @override

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:real/models/sale.dart';
+import 'package:real/entity/sale.dart';
 
 final sales = <Sale>[
   Sale(

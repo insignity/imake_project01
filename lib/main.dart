@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:real/pages/auth.dart';
-import 'package:real/pages/home.dart';
+import 'package:real/ui/auth/auth.dart';
+import 'package:real/ui/home/home.dart';
 import 'package:flutter/cupertino.dart';
-import 'models/profile.dart';
+import 'package:real/ui/auth/confirm/confirm.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'pages/sms.dart';
+import 'entity/profile.dart';
 
 void main() => runApp(RealApp());
 
@@ -58,12 +58,12 @@ class RealApp extends StatelessWidget {
                     TextStyle(fontSize: 18, fontWeight: FontWeight.normal)),
           ),
         ),
-        home: HomePage(),
+        home: AuthorizationPage(),
         routes: {
           '/start': (BuildContext context) => RealApp(),
           '/auth': (BuildContext context) => AuthorizationPage(),
-          '/auth/sms': (BuildContext context) => SmsPage(),
-          '/auth/sms/home': (BuildContext context) => HomePage(),
+          '/auth/sms': (BuildContext context) => ConfirmPage(),
+          '/home': (BuildContext context) => HomePage(),
         },
       ),
     );

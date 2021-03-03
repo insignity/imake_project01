@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:real/components/second_component/salons_tab.dart';
-import 'second_component/freelancers_tab.dart';
+import 'package:real/ui/second_component/freelancers_tab.dart';
+import 'package:real/ui/second_component/salons_tab.dart';
 
 class Freelancers extends StatefulWidget {
   Freelancers({Key key}) : super(key: key);

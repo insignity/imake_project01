@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:real/components/second_component/swiper.dart';
-import 'package:real/lists/sales.dart';
-import 'package:real/lists/salons.dart';
+import 'package:real/data/lists/sales.dart';
+import 'package:real/data/lists/salons.dart';
+import 'package:real/ui/second_component/swiper.dart';
 
 import 'filter_second.dart';
 import 'subtitle_second.dart';

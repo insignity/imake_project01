@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:real/models/worker.dart';
+import 'package:real/entity/worker.dart';
 
 Widget subtitle(BuildContext context, Worker workout) {
   var color = Colors.grey;

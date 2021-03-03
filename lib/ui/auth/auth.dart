@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gender_selection/gender_selection.dart';
-import 'package:real/pages/home.dart';
+import 'package:real/ui/home/home.dart';
 
 class AuthorizationPage extends StatefulWidget {
   AuthorizationPage({Key key}) : super(key: key);
