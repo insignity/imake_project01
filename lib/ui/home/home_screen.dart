@@ -1,11 +1,11 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:real/ui/free-platform.dart';
-import 'package:real/ui/all-posts.dart';
-import 'package:real/ui/search.dart';
-import 'package:real/ui/profile_component.dart';
-import 'package:real/ui/camera_component.dart';
+import 'package:real/ui/first_component/free-platform.dart';
+import 'package:real/ui/all_posts/all-posts.dart';
+import 'package:real/ui/second_component/search.dart';
+import 'package:real/ui/profile/profile_component.dart';
+import 'package:real/ui/download/camera_component.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int sectionIndex = 1;
+  int sectionIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,8 @@ class _HomePageState extends State<HomePage> {
         setState(() => sectionIndex = index);
       },
     );
-    checkingBottomNavigationBar() {
+
+    callBottomNavigationBarItem(int sectionIndex) {
       switch (sectionIndex) {
         case 0:
           return FreePlatformPage();
@@ -58,7 +59,7 @@ class _HomePageState extends State<HomePage> {
       }
     }
 
-    checkingBottomNavigationBarForTitle() {
+    titleBottomNavigationBar() {
       switch (sectionIndex) {
         case 0:
           return 'FreePlatformPage';
@@ -82,13 +83,13 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
-          title: Text(checkingBottomNavigationBarForTitle()),
+          title: Text(titleBottomNavigationBar()),
           leading: Icon(
             Icons.reorder,
             size: 50,
           ),
         ),
-        body: checkingBottomNavigationBar(),
+        body: callBottomNavigationBarItem(sectionIndex),
         bottomNavigationBar: navigationBar,
       ),
     );

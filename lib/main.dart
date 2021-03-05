@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:real/ui/auth/auth.dart';
-import 'package:real/ui/home/home.dart';
+import 'package:real/ui/home/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:real/ui/auth/confirm/confirm.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
