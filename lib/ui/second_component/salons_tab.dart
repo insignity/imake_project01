@@ -190,7 +190,9 @@ class _SalonsTabState extends State<SalonsTab> {
                             Container(
                               alignment: Alignment.bottomCenter,
                               child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamed('/signup');
+                                  },
                                   child: Container(
                                       padding:
                                           EdgeInsets.symmetric(horizontal: 30),

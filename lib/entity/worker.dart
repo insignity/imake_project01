@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:real/entity/service.dart';
 
 class Worker {
   String title;
@@ -10,7 +11,7 @@ class Worker {
   AssetImage avatar;
   int price;
   List<int> works;
-
+  List<Service> services;
   Worker(
       {this.title,
       this.author,
@@ -20,5 +21,6 @@ class Worker {
       this.date,
       this.avatar,
       this.price,
-      this.works});
+      this.works,
+      this.services});
 }

@@ -42,7 +42,8 @@ dependencies:
   bloc: ^6.1.1
   graphic: ^0.3.0
   charts_flutter: ^0.9.0
-
+  flutter_swiper: ^1.1.6
+  
 dependency_overrides:
   intl: any
 
@@ -67,6 +68,7 @@ flutter:
     - assets/images/people/
     - assets/images/posts/left/
     - assets/images/posts/right/
+    - assets/images/services/
     - assets/lang/
   #   - images/a_dot_ham.jpeg
 

@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:real/ui/auth/confirm/confirm.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:real/ui/profile/big_data_page.dart';
-import 'package:real/ui/profile/charts.dart';
+import 'package:real/ui/second_component/sign_up/form.dart';
 
 import 'entity/profile.dart';
 
@@ -60,13 +60,13 @@ class RealApp extends StatelessWidget {
                     TextStyle(fontSize: 18, fontWeight: FontWeight.normal)),
           ),
         ),
-        home: HomePage(),
+        home: AuthorizationPage(),
         routes: {
           '/start': (BuildContext context) => RealApp(),
           '/auth': (BuildContext context) => AuthorizationPage(),
           '/auth/sms': (BuildContext context) => ConfirmPage(),
           '/home': (BuildContext context) => HomePage(),
-          '/data': (BuildContext context) => Super(),
+          '/signup': (BuildContext context) => SignUpForm(),
         },
       ),
     );
