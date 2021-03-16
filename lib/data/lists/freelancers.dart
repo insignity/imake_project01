@@ -8,49 +8,59 @@ final services1 = <Service>[
   Service(
       name: "Ресницы",
       image: AssetImage("assets/images/services/11.jpg"),
+      minutes: 60,
       price: 500),
   Service(
       name: "Ногти",
-      image: AssetImage("assets/images/services/1.jpg"),
+      image: AssetImage("assets/images/services/1.JPG"),
+      minutes: 120,
       price: 1500),
 ];
 final services2 = <Service>[
   Service(
       name: "Ногти",
+      minutes: 120,
       image: AssetImage("assets/images/services/2.jpg"),
       price: 1200),
   Service(
       name: "Ресницы",
       image: AssetImage("assets/images/services/22.JPG"),
+      minutes: 120,
       price: 400),
 ];
 final services3 = <Service>[
   Service(
       name: "Ногти",
+      minutes: 120,
       image: AssetImage("assets/images/services/3.JPG"),
       price: 1200),
   Service(
       name: "Ресницы",
+      minutes: 60,
       image: AssetImage("assets/images/services/33.JPG"),
       price: 400),
 ];
 final services4 = <Service>[
   Service(
       name: "Ногти",
+      minutes: 120,
       image: AssetImage("assets/images/services/4.JPG"),
       price: 1200),
   Service(
       name: "Ресницы",
+      minutes: 60,
       image: AssetImage("assets/images/services/44.JPG"),
       price: 400),
 ];
 final services5 = <Service>[
   Service(
       name: "Ногти",
+      minutes: 120,
       image: AssetImage("assets/images/services/5.JPG"),
       price: 1200),
   Service(
       name: "Ресницы",
+      minutes: 60,
       image: AssetImage("assets/images/services/55.JPG"),
       price: 400),
 ];

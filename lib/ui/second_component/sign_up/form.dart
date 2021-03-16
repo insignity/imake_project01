@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:real/data/lists/freelancers.dart';
+import 'package:real/entity/service.dart';
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -9,13 +11,26 @@ class SignUpForm extends StatefulWidget {
 class _SignUpFormState extends State<SignUpForm> {
   ListView listWorker;
   ScrollController scrollController;
-  int activeIndex = -1;
+  int activeIndex = 0;
+  List<Widget> basket = [Container()];
+  int countOfItemsInBasket = 0;
 
   BoxDecoration activeMaster(int index) {
     return BoxDecoration(
         border: Border.all(color: Colors.red, width: 4.0),
         image: DecorationImage(
             fit: BoxFit.fill, image: freelancers[index].avatar));
+  }
+
+  addServiceToBasket(Service service) {
+    setState(() {
+      countOfItemsInBasket++;
+      basket.add(ListTile(
+        leading: Text(countOfItemsInBasket.toString()),
+        title: Text(service.name),
+        trailing: Text(service.price.toString()),
+      ));
+    });
   }
 
   changeActiveIndex(int index) {
@@ -77,6 +92,8 @@ class _SignUpFormState extends State<SignUpForm> {
               elevation: 2.0,
               child: InkWell(
                   onTap: () {
+                    addServiceToBasket(
+                        freelancers[activeIndex].services[index]);
                     //changeActiveIndex(index);
                   },
                   child: Container(
@@ -97,16 +114,31 @@ class _SignUpFormState extends State<SignUpForm> {
                         Expanded(
                           child: Container(
                               padding: EdgeInsets.only(top: 100),
-                              child: Column(
+                              child: Row(
                                 children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 2.0),
+                                      child: Text(
+                                          freelancers[activeIndex]
+                                              .services[index]
+                                              .name,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          )),
+                                    ),
+                                  ),
                                   Text(
                                       freelancers[activeIndex]
                                           .services[index]
-                                          .name,
+                                          .price
+                                          .toString(),
                                       style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.white70,
+                                        color: Colors.white,
                                       )),
                                 ],
                               ),
@@ -122,33 +154,37 @@ class _SignUpFormState extends State<SignUpForm> {
         automaticallyImplyLeading: false,
         title: Center(child: Text('Записаться')),
       ),
-      body: Column(
-        children: [
+      body: Container(
+          child: Column(children: [
+        Container(
+            child: Text(
+          'Выберите мастера',
+          style:
+              TextStyle(height: 2, fontSize: 18, fontWeight: FontWeight.bold),
+        )),
+        Container(
+          height: 150,
+          child: listWorker,
+        ),
+        Column(children: [
           Container(
-              child: Text(
-            'Выберите мастера',
-            style:
-                TextStyle(height: 2, fontSize: 18, fontWeight: FontWeight.bold),
-          )),
-          Container(height: 150, child: listWorker),
-          ((activeIndex > -1) && (activeIndex < 6))
-              ? Column(
-                  children: [
-                    Container(
-                      child: Text(
-                        "Ввиды услуг",
-                        style: TextStyle(
-                            height: 2,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    Container(height: 150, child: listServices),
-                  ],
-                )
-              : Container()
-        ],
-      ),
+            child: Text(
+              "Виды услуг",
+              style: TextStyle(
+                  height: 2, fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ]),
+        Container(height: 150, child: listServices),
+        Expanded(
+            child: Container(
+          alignment: Alignment.bottomCenter,
+          color: Colors.red,
+          child: Column(
+            children: basket,
+          ),
+        ))
+      ])),
     );
   }
 }
