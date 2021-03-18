@@ -5,7 +5,8 @@ import 'package:real/ui/home/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:real/ui/auth/confirm/confirm.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:real/ui/second_component/sign_up/form.dart';
+import 'package:real/ui/second_component/make_order/choose_time.dart';
+import 'package:real/ui/second_component/make_order/form.dart';
 
 import 'entity/profile.dart';
 
@@ -59,13 +60,14 @@ class RealApp extends StatelessWidget {
                     TextStyle(fontSize: 18, fontWeight: FontWeight.normal)),
           ),
         ),
-        home: SignUpForm(),
+        home: ChooseTime(),
         routes: {
           '/start': (BuildContext context) => RealApp(),
           '/auth': (BuildContext context) => AuthorizationPage(),
           '/auth/sms': (BuildContext context) => ConfirmPage(),
           '/home': (BuildContext context) => HomePage(),
           '/signup': (BuildContext context) => SignUpForm(),
+          '/signup/time': (BuildContext context) => ChooseTime(),
         },
       ),
     );

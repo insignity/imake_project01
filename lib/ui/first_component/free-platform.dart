@@ -15,7 +15,6 @@ class FreePlatformPage extends StatefulWidget {
 class _FreePlatformPageState extends State<FreePlatformPage> {
   @override
   Widget build(BuildContext context) {
-    //||||||||||||||||||||||||MAIN||||||||||||||||||
     return context.watch<Profile>().isUserClient
         ? ClientForm()
         : FreelancerForm();

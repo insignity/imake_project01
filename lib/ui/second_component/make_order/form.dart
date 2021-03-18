@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:real/data/lists/freelancers.dart';
 import 'package:real/entity/service.dart';
+import 'package:real/ui/second_component/make_order/choose_time.dart';
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -9,12 +10,18 @@ class SignUpForm extends StatefulWidget {
 }
 
 class _SignUpFormState extends State<SignUpForm> {
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  int activeIndex;
   ListView listWorker;
   ScrollController scrollController;
-  int activeIndex = 0;
-  List<Widget> basket = [Container()];
-  int countOfItemsInBasket = 0;
-
+  int countOfItemsInBasket;
+  Service lastAddedService;
+  List<Service> listService;
   BoxDecoration activeMaster(int index) {
     return BoxDecoration(
         border: Border.all(color: Colors.red, width: 4.0),
@@ -23,14 +30,8 @@ class _SignUpFormState extends State<SignUpForm> {
   }
 
   addServiceToBasket(Service service) {
-    setState(() {
-      countOfItemsInBasket++;
-      basket.add(ListTile(
-        leading: Text(countOfItemsInBasket.toString()),
-        title: Text(service.name),
-        trailing: Text(service.price.toString()),
-      ));
-    });
+    lastAddedService = service;
+    listService.add(service);
   }
 
   changeActiveIndex(int index) {
@@ -39,8 +40,38 @@ class _SignUpFormState extends State<SignUpForm> {
     });
   }
 
+  delete(int index) {
+    listService.removeAt(index);
+  }
+
+  init() {
+    activeIndex = 0;
+    listService = [];
+    countOfItemsInBasket = 0;
+  }
+
   @override
   Widget build(BuildContext context) {
+    var listView = (countOfItemsInBasket > 0)
+        ? ListView.builder(
+            itemCount: countOfItemsInBasket,
+            itemBuilder: (context, index) {
+              return InkWell(
+                onTap: () {
+                  delete(index);
+                  setState(() {
+                    countOfItemsInBasket--;
+                  });
+                },
+                child: ListTile(
+                  leading: Text("Мастер " + freelancers[activeIndex].author),
+                  title: Text(listService[index].name),
+                  trailing: Text(listService[index].price.toString()),
+                ),
+              );
+            },
+          )
+        : Container();
     var listWorker = ListView.builder(
         controller: scrollController,
         itemCount: 5,
@@ -84,7 +115,6 @@ class _SignUpFormState extends State<SignUpForm> {
                       ]))));
         });
     var listServices = ListView.builder(
-        controller: scrollController,
         itemCount: 2,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
@@ -94,22 +124,20 @@ class _SignUpFormState extends State<SignUpForm> {
                   onTap: () {
                     addServiceToBasket(
                         freelancers[activeIndex].services[index]);
-                    //changeActiveIndex(index);
+                    setState(() {
+                      countOfItemsInBasket++;
+                    });
                   },
                   child: Container(
                       height: 150,
                       width: 150,
-                      decoration:
-                          /*index == activeIndex
-                          ? activeMaster(index)
-                          : */
-                          BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: freelancers[activeIndex]
-                                      .services[index]
-                                      .image),
-                              color: Color.fromRGBO(50, 65, 85, 0.8)),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: freelancers[activeIndex]
+                                  .services[index]
+                                  .image),
+                          color: Color.fromRGBO(50, 65, 85, 0.8)),
                       child: Row(children: [
                         Expanded(
                           child: Container(
@@ -177,13 +205,11 @@ class _SignUpFormState extends State<SignUpForm> {
         ]),
         Container(height: 150, child: listServices),
         Expanded(
-            child: Container(
-          alignment: Alignment.bottomCenter,
-          color: Colors.red,
-          child: Column(
-            children: basket,
-          ),
-        ))
+            child:
+                Container(alignment: Alignment.bottomCenter, child: listView)),
+        ElevatedButton(onPressed: (){
+          Navigator.pushNamed(context, "/signup/time");
+        }, child: Text("Выбрать время"), )
       ])),
     );
   }
