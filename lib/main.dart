@@ -60,7 +60,7 @@ class RealApp extends StatelessWidget {
                     TextStyle(fontSize: 18, fontWeight: FontWeight.normal)),
           ),
         ),
-        home: ChooseTime(),
+        home: AuthorizationPage(),
         routes: {
           '/start': (BuildContext context) => RealApp(),
           '/auth': (BuildContext context) => AuthorizationPage(),
